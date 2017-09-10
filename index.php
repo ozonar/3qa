@@ -63,7 +63,7 @@ body {
 									what : $('#what').attr('value'),
 									 auto : $('#auto').attr('checked'),
 									  image : 'checked',
-									   nolink : $('#nolink').attr('checked'),
+									   nolink : $('#nolink').attr('checked')
 				}, function(data) {
                     $('#user_data').html(data);
                 });
