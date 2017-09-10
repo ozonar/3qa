@@ -90,7 +90,7 @@ body {
 
 
 <!-- Иконка _black-->
-<link rel="shortcut icon" href="http://anim.0hd.ru/favicon.ico" type="image/ico">
+<link rel="shortcut icon" href="favicon.ico" type="image/ico">
     
 
 </head>
