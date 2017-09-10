@@ -32,8 +32,8 @@ body {
 
 </style>
 	
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<!--    <script type="text/javascript" src="data/jquery-1.8.3.min.js"></script>-->
+<!--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+    <script type="text/javascript" src="data/jquery-1.8.3.min.js"></script>
 	<link href="data/bootstrap.min.css" rel="stylesheet">
 	<script src="data/bootstrap.min.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
