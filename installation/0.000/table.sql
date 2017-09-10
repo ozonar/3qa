@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS short
+(
+  id     INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  little TEXT,
+  `long` TEXT,
+  ip     VARCHAR(20)
+)
