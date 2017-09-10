@@ -32,7 +32,8 @@ body {
 
 </style>
 	
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+    <script type="text/javascript" src="data/jquery-3.2.1.min.js"></script>
 	<link href="data/bootstrap.min.css" rel="stylesheet">
 	<script src="data/bootstrap.min.js"></script>
 	<script src='https://www.google.com/recaptcha/api.js'></script>
@@ -42,7 +43,7 @@ body {
         $(document).ready(function() {
 			
             $('#short_button').click(function() {
-                $.post('save.php', {link : $('#link').attr('value'), 
+                $.post('save.php', {link : $('#link').attr('value'),
 									 what : $('#what').attr('value'),
 									  auto : $('#auto').attr('checked'),
 									   nolink : $('#nolink').attr('checked'),
@@ -316,7 +317,7 @@ if ($request=='')
 <div class='invisible'>Сокращалка ссылок. Максим Анархистов. ver 2.3 </div>
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
+<script type="text/javascript" >
     (function (d, w, c) {
         (w[c] = w[c] || []).push(function() {
             try {
@@ -336,13 +337,14 @@ if ($request=='')
             f = function () { n.parentNode.insertBefore(s, n); };
         s.type = "text/javascript";
         s.async = true;
-        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
 
         if (w.opera == "[object Opera]") {
             d.addEventListener("DOMContentLoaded", f, false);
         } else { f(); }
     })(document, window, "yandex_metrika_callbacks");
 </script>
+<noscript><div><img src="https://mc.yandex.ru/watch/30166244" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
 
