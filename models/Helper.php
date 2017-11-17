@@ -11,12 +11,17 @@ namespace Main;
 
 class Helper
 {
-
-    public static function requestString($value)
+// Функция однократного перемещения. Чтобы выкинуть http
+    public static function str_ireplace_once($search, $replace, $text)
+    {
+        $pos = stripos($text, $search);
+        return $pos!==false ? substr_replace($text, $replace, $pos, strlen($search)) : $text;
+    }
+    public static function requestString($value, $default = '')
     {
 
         if (isset($_REQUEST[$value])) {
-            return self::filter($_REQUEST[$value], '');
+            return self::filter($_REQUEST[$value], $default);
         } else {
             return '';
         }

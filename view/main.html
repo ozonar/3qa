@@ -1,2 +1,106 @@
-<b>asd</b>asd
+<div class='row'>
+    <div class='col-md-3 col-md-offset-5'>
+        <div class='dropdown'>
+            <div class='dropdown dropdown-toggle' data-toggle='dropdown' aria-expanded='true' role='button'>
+                <img src='data/3qa.png' width='90' alt='3qa.ru'><span class='caret' aria-hidden='true'></span>
+            </div>
+            <ul class='dropdown-menu' role='menu'>
+                <li role='presentation'><a role='menuitem' tabindex='-1' href='#' data-toggle='modal' data-target='#inform'>Войти</a></li>
+                <li role='presentation'><a role='menuitem' tabindex='-1' href='#' data-toggle='modal' data-target='#inform'>Зарегистрироваться </a></li>
+                <li role='presentation'><a role='menuitem' tabindex='-1' href='#' data-toggle='modal' data-target='#inform'>Бонусные функции</a></li>
+                <li role='presentation'><a role='menuitem' tabindex='-1' href='#' data-toggle='modal' data-target='#inform'>Что происходит?</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 
+
+
+<div class='modal fade bs-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true' id='inform'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                <h4 class='modal-title' id='myModalLabel'>Информация к размышлению</h4>
+            </div>
+            <div class='modal-body'>
+                Привет! Этот сайт позволяет сделать из длинной ссылки короткую для быстрого её запоминания, а также создать для длинной ссылки ссылку-синоним вида <a href='http://".$_SERVER['SERVER_NAME']."/anything'>".$_SERVER['SERVER_NAME']."/anything</a>. На данный момент проект имеет базовую (вполне рабочую) функциональность, и не имеет специфических (хитрозадуманных) функций вроде запоминания всех ранее введенных ссылок и возможности их удалить (хотя тестовая страничка с этим функционалом уже <a href='http://admin.3qa.ru'>имеется</a>), но сервис будет развиваться и совершенствоваться.<br>
+                <br>
+                В дальнейшем планируется создать страницу при переходе по сокращенной ссылке, на которой будет размещен десятисекундный таймер с рекламой (или любой другой информацией), с помощью которой вы можете зарабатывать. Также планируются собственные поддомены, статистика, сохранение файлов по короткой ссылке, ссылка позволяющую отследить и сохранить данные посетившего её пользователя и торрент трекер (шутка).<br>
+                <br>
+                Список текущих задач:<br>
+                Сохранение картинок - тестовый режим (доступен при регистрации).<br>
+                Регистрация - в разработке<br>
+                Админка - в разработке <br>
+                Сохранение данных пользователя - в разработке<br>
+                Сохранение файлов - в планах<br>
+                Реклама - в планах<br>
+
+
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-default' data-dismiss='modal'>Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class='row'>
+    <div class='col-md-1 col-md-offset-4'>
+        Сюда&nbsp;ссылку:
+    </div>
+
+
+    <div class='col-md-3'>
+        <div class='input-group'>
+            <input type='text' class='form-control' id='link'>
+            <span class='input-group-addon' rel='tooltip' data-toggle='tooltip' data-placement='bottom' title='Поставьте здесь галочку, если необходим просто текст. Будут работать перенос строк по /n и не будет ссылки'>
+        <input type='checkbox' id='nolink'>
+      </span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='row'>
+    <div class='col-md-1 col-md-offset-4 example-1'>
+
+        3qa.ru/
+
+        <a class='btn-mini btn-info' data-toggle='tooltip' data-placement='bottom' title='Сюда можно ввести короткую ссылку'>?</a>
+    </div>
+
+
+    <div class='col-md-3'>
+        <div class='input-group'>
+            <input type='text' class='form-control' id='what' value='%%shortlink%%'>
+            <span class='input-group-addon' rel='tooltip' data-toggle='tooltip' data-placement='bottom' title='Поставьте здесь галочку, если не хотите, чтобы перемещение на сайт происходило автоматически'>
+        <input type='checkbox' id='auto'>
+      </span>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class='row'>
+    <div class='col-md-3 col-md-offset-5'>
+        <input type='submit' value='Сократить' class='searchfield btn btn-primary' name='submit' id='short_button'>
+        <input type='submit' value='Сохранить' class='searchfield btn btn' name='submit' id='save_button'>
+        <br>
+
+    </div>
+</div>
+
+<br>
+
+<div class='row'>
+    <div class='col-md-4 col-md-offset-4'>
+        <div id='user_data'></div>
+    </div>
+</div>

@@ -103,44 +103,44 @@ class Save
     }
     
 
-    public function captcha()
-    {
-
-        // Каптча проверка
-        if (!google_curl($captcha, $secret_key) && false) {
-            $result = mysqli_query("SELECT `ip` FROM `short` WHERE `long` LIKE '$link';", $db);
-            while ($tablerows = mysqli_fetch_row($result)) {
-
-                if ($tablerows[0] == $_SERVER["REMOTE_ADDR"]) {
-                    echo $save->resultCaptcha($public_key);
-                    exit;
-
-                }
-            }
-        }
-
-        // смотрим последнее число (PDO)
-        $last_num = $pdo->query("SELECT `long` FROM `short` WHERE `little` = '404' LIMIT 0 , 30;")->fetch();
-        $last_num = $last_num["long"] ? $last_num["long"] : 101;
-
-        // Совпадения?
-        $sovpad = $pdo->prepare("SELECT `long` FROM `short` WHERE `little` LIKE ?");
-        $sovpad->execute(array($last_num + 1));
-        $sovpad = $sovpad->fetch();
-        $sovpad = $sovpad['long'];
-
-        $i = 1;
-        while ($sovpad == $last_num + $i) {
-            $i = $i + 1;
-            $sovpad = $pdo->prepare("SELECT `long` FROM `short` WHERE `little` LIKE ?");
-            $sovpad->execute(array($last_num + $i + 1));
-            $sovpad = $sovpad->fetch();
-            $sovpad = $sovpad['long'];
-        }
-        $what = $last_num + $i;
-
-        mysqli_query("UPDATE `shorter`.`short` SET `long` = $what WHERE `short`.`little` = '404';", $db);
-    }
+//    public function captcha()
+//    {
+//
+//        // Каптча проверка
+//        if (!google_curl($captcha, $secret_key) && false) {
+//            $result = mysqli_query("SELECT `ip` FROM `short` WHERE `long` LIKE '$link';", $db);
+//            while ($tablerows = mysqli_fetch_row($result)) {
+//
+//                if ($tablerows[0] == $_SERVER["REMOTE_ADDR"]) {
+//                    echo $save->resultCaptcha($public_key);
+//                    exit;
+//
+//                }
+//            }
+//        }
+//
+//        // смотрим последнее число (PDO)
+//        $last_num = $pdo->query("SELECT `long` FROM `short` WHERE `little` = '404' LIMIT 0 , 30;")->fetch();
+//        $last_num = $last_num["long"] ? $last_num["long"] : 101;
+//
+//        // Совпадения?
+//        $sovpad = $pdo->prepare("SELECT `long` FROM `short` WHERE `little` LIKE ?");
+//        $sovpad->execute(array($last_num + 1));
+//        $sovpad = $sovpad->fetch();
+//        $sovpad = $sovpad['long'];
+//
+//        $i = 1;
+//        while ($sovpad == $last_num + $i) {
+//            $i = $i + 1;
+//            $sovpad = $pdo->prepare("SELECT `long` FROM `short` WHERE `little` LIKE ?");
+//            $sovpad->execute(array($last_num + $i + 1));
+//            $sovpad = $sovpad->fetch();
+//            $sovpad = $sovpad['long'];
+//        }
+//        $what = $last_num + $i;
+//
+//        mysqli_query("UPDATE `shorter`.`short` SET `long` = $what WHERE `short`.`little` = '404';", $db);
+//    }
 
     public function resultEmpty()
     {

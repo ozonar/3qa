@@ -34,6 +34,9 @@ class database
      */
     public static function getDatabase()
     {
+        if (!self::$database) {
+            self::createNewDatabase();
+        }
         return self::$database;
     }
 }

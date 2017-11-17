@@ -15,10 +15,9 @@ class HTML
     }
 
     static public function render($template, $data = array()) {
-//        return '123';
         $content = file_get_contents(self::$folder."/{$template}.html");
         $content = self::design_render_text($content, $data);
-        return $content.'123';
+        return $content;
     }
 
     static private function design_render_text($content, $data = array()) {
@@ -42,7 +41,7 @@ class HTML
     static private function design_parse($content, $data) {
         preg_match_all('/\%\%(.*?)\%\%/si', $content, $res);
         if (@$res[1])
-            foreach ($res[1] as $el) $content = str_ireplace('%%'.$el.'%%', $data[$el], $content);
+            foreach ($res[1] as $el) $content = @str_ireplace('%%'.$el.'%%', $data[$el], $content);
         return $content;
     }
 }
