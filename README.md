@@ -1,4 +1,3 @@
 Link shortener
 
-Example:
-# 3qa
+Example: http://3qa.ru
