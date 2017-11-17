@@ -16,17 +16,22 @@ class database
 
     public static function createNewDatabase()
     {
+        $config = [];
+        try {
+            $config = require_once ('config.php');
+        } catch (\Exception $e) {
+            echo 'Create config.php file in root: <br> cp config.dist.php config.php';
+        }
         self::$database = new Medoo(
             [
-                'database_type' => 'mysql',
-                'database_name' => 'shorter',
-                'server' => 'localhost',
-                'username' => 'root',
-                'password' => 'Expl$osion9200',
-                'charset' => 'utf8',
+                'database_type' => $config['dbtype'],
+                'database_name' => $config['dbname'],
+                'server' => $config['host'],
+                'username' => $config['username'],
+                'password' => $config['password'],
+                'charset' => $config['charset'],
             ]
         );
-
     }
 
     /**
