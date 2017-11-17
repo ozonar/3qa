@@ -1,29 +1,22 @@
 
-<?
-echo"<pre>ss";
+<?php
+echo "ss";
 
 
 $ch = curl_init('http://hm6.ru/poisk-po-bukve/%D8/');
 
-// Ïàğàìåòğû êóğëà
+
 curl_setopt($ch, CURLOPT_USERAGENT, 'IE20');
 curl_setopt($ch, CURLOPT_HEADER, 0);
-// Ñëåäóşùàÿ îïöèÿ íåîáõîäèìà äëÿ òîãî, ÷òîáû ôóíêöèÿ curl_exec() âîçâğàùàëà çíà÷åíèå à íå âûâîäèëà ñîäåğæèìîå ïåğåìåííîé íà ıêğàí
+
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, '1');
 
-// Ïîëó÷àåì html
+
 $text = curl_exec($ch);
 
 
 //curl_close($ch);
 
-preg_match_all("#class='b-listing-singers__item__name_m'><a href='\/([A-z0-9.-]+)\/'>([A-zÀ-ÿ?)#", $text , $links );
+preg_match_all("#class='b-listing-singers__item__name_m'><a href='\/([A-z0-9.-]+)\/'>([A-zï¿½-ï¿½?)#", $text , $links );
 print_r ($links[2]);
 print_r ($links[1]);
-
-
-
-
-//echo $links[1][0];
-
-?>
