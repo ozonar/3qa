@@ -3,8 +3,12 @@ require_once('autoload.php');
 use Main\Helper;
 use models\Index;
 
-$request = Helper::requestString('request', '');
 $defaultShortLink = Helper::requestString('shortlink', '');
+
+$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$request = parse_url($request);
+$request = str_replace('/', '', current($request));
+
 ?>
 <!DOCTYPE HTML>
 <html>
