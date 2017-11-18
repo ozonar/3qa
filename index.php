@@ -46,7 +46,7 @@ $defaultShortLink = Helper::requestString('shortlink', '');
 <body>
 <?php
 
-Index::getBody($request, $defaultShortLink);
+echo Index::getBody($request, $defaultShortLink);
 
 ?>
 

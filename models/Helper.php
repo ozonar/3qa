@@ -102,4 +102,27 @@ class Helper
         $code = substr($code, 0, (int)$length);
         return $code;
     }
+
+    public static function rcurl()
+    {
+        $hosts = '3qa.ru';
+        $secret_key = 'bf2fa7a3025c90c9ce9d567f856ab7718e172d05';
+        if ($curl = curl_init()) {
+            curl_setopt($curl, CURLOPT_URL,
+                'http://api.mywot.com/0.4/public_link_json2');
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, "key=$secret_key&callback=process&hosts=" . $hosts);
+            $out = curl_exec($curl);
+            $out = json_decode($out);
+
+            $out = (array)$out;
+            curl_close($curl);
+            return $out;
+        }
+
+        return [];
+    }
 }

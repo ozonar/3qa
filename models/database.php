@@ -18,7 +18,7 @@ class database
     {
         $config = [];
         try {
-            $config = require_once ('config.php');
+            $config = require ('config.php');
         } catch (\Exception $e) {
             echo 'Create config.php file in root: <br> cp config.dist.php config.php';
         }

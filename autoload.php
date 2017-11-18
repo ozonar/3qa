@@ -14,6 +14,7 @@ require_once ('models/database.php');
 require_once ('models/Medoo.php');
 \models\database::createNewDatabase();
 
+require_once ('models/Config.php');
 require_once ('models/render.php');
 require_once ('models/Helper.php');
 require_once ('models/Save.php');

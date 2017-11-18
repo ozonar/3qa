@@ -19,6 +19,7 @@ class Save
     const TYPE_RELINK = 2;
     const TYPE_IMAGE = 3;
     const TYPE_TEXT = 12;
+    const TYPE_BAD_REPUTATION = 13;
 
 
     // Получаем данные с предыдущей формы
