@@ -91,7 +91,6 @@ class Index
             if (!$reputation) {
                 $reputation = 20;
             }
-
         }
             return $reputation;
     }

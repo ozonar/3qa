@@ -40,20 +40,12 @@ $request = str_replace('/', '', current($request));
     <link href="data/bootstrap.min.css" rel="stylesheet">
     <script src="data/bootstrap.min.js"></script>
     <!--    <script src='https://www.google.com/recaptcha/api.js'></script>-->
-
-
-    <!-- Иконка _black-->
     <link rel="shortcut icon" href="favicon.ico" type="image/ico">
 
 
 </head>
 <body>
-<?php
-
-echo Index::getBody($request, $defaultShortLink);
-
-?>
-
+<?php echo Index::getBody($request, $defaultShortLink); ?>
 
 <div class='invisible'>Сокращалка ссылок. Максим Анархистов. ver 2.3</div>
 
