@@ -39,9 +39,9 @@ $request = str_replace('/', '', current($request));
     <link href="data/main.css" rel="stylesheet">
     <link href="data/bootstrap.min.css" rel="stylesheet">
     <script src="data/bootstrap.min.js"></script>
-    <!--    <script src='https://www.google.com/recaptcha/api.js'></script>-->
+    <link rel="stylesheet" href="data/font-awesome/css/font-awesome.min.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/ico">
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 <body>

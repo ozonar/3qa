@@ -8,18 +8,23 @@
 
 namespace models;
 
+use Main\Helper;
+
 class Save
 {
 
 
     const ANSWER_EXISTED = 1;
     const ANSWER_WRONG_PASSWORD = 2;
+    const ANSWER_EMPTY = 3;
+    const ANSWER_ENTER_CAPTCHA = 4;
 
     const TYPE_NO_RELINK = 6;
     const TYPE_RELINK = 2;
     const TYPE_IMAGE = 3;
     const TYPE_TEXT = 12;
     const TYPE_BAD_REPUTATION = 13;
+    const TYPE_EMPTY_REPUTATION = 14;
 
 
     // Получаем данные с предыдущей формы
@@ -36,24 +41,6 @@ class Save
     {
         $this->database = database::getDatabase();
     }
-
-
-    public function set_global_parameters()
-    {
-        // Получаем данные с предыдущей формы
-        $this->link = filter($_REQUEST['link']);
-        $this->what = filter($_REQUEST['what']);
-        $this->auto = $_REQUEST['auto'];
-        $this->nolink = $_REQUEST['nolink'];
-        $this->image = $_REQUEST['image'];
-        $this->captcha = $_REQUEST['captcha'];
-    }
-
-    public function test()
-    {
-        return '23';
-    }
-
 
     public function getShortNumber()
     {
@@ -102,23 +89,29 @@ class Save
 
         return $type;
     }
-    
 
-//    public function captcha()
+
+//    public function captcha($captcha)
 //    {
+//        $secret_key = Config::get()['secret_key'];
+//        $public_key = Config::get()['public_key'];
 //
 //        // Каптча проверка
-//        if (!google_curl($captcha, $secret_key) && false) {
-//            $result = mysqli_query("SELECT `ip` FROM `short` WHERE `long` LIKE '$link';", $db);
-//            while ($tablerows = mysqli_fetch_row($result)) {
-//
-//                if ($tablerows[0] == $_SERVER["REMOTE_ADDR"]) {
-//                    echo $save->resultCaptcha($public_key);
-//                    exit;
-//
-//                }
+//        if (!Helper::google_curl($captcha, $secret_key)) {
+//            $result = $this->database->select('short', 'ip', ['long[LIKE]' => $link]);
+//            if (current($result['id']) == $_SERVER["REMOTE_ADDR"]) {
+//                echo $this->resultCaptcha($public_key);
 //            }
 //        }
+////            $result = mysqli_query("SELECT `ip` FROM `short` WHERE `long` LIKE '$link';", $db);
+////            while ($tablerows = mysqli_fetch_row($result)) {
+////
+////                if ($tablerows[0] == $_SERVER["REMOTE_ADDR"]) {
+////                    echo $save->resultCaptcha($public_key);
+////                    exit;
+////
+////                }
+////            }
 //
 //        // смотрим последнее число (PDO)
 //        $last_num = $pdo->query("SELECT `long` FROM `short` WHERE `little` = '404' LIMIT 0 , 30;")->fetch();
@@ -145,50 +138,36 @@ class Save
 
     public function resultEmpty()
     {
-        return " <div class='alert alert-danger' role='alert'>
-						<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-						Нет ничего же!
-					</div>";
+        return HTML::render('answerTypes/empty');
     }
 
     public function resultCaptcha($public_key)
     {
-        $result = "<div class='alert alert-danger' role='alert'>
-							<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
-							Подозрительный вы какой-то. Пройдите тест:
-						  </div>";
-
-        $result .= "<form id='mainform'><div class='g-recaptcha' data-sitekey='$public_key'></div></form> <script src='https://www.google.com/recaptcha/api.js'></script>";
-
-        return $result;
-
+        return HTML::render('answerTypes/needEnterCaptcha', ['publicKey' => $public_key]);
     }
 
     public function resultExistDublicate()
     {
-        return ['code' => self::ANSWER_EXISTED, 'message' => 'Такой индентификатор уже существует'];
+        return HTML::render('answerTypes/existedIndentifier');
     }
 
     public function resultWrongPassword()
     {
-        return ['code' => self::ANSWER_WRONG_PASSWORD, 'message' => 'Неверный пароль'];
+        return HTML::render('answerTypes/needPassword');
     }
 
     public function resultDownloadError()
     {
-        return ['code' => self::ANSWER_WRONG_PASSWORD, 'message' => 'Неверный пароль'];
+        return HTML::render('answerTypes/loadingError');
     }
 
     public function resultErrorWhileSaving()
     {
-        return ['code' => self::ANSWER_WRONG_PASSWORD, 'message' => 'Сайт допустил недопустимое, выполнил невыполнимое.'];
+        return HTML::render('answerTypes/error');
     }
 
     public function resultSuccess($shortLink)
     {
-        $serverName = $_SERVER['SERVER_NAME'];
-        return ['code' => self::ANSWER_WRONG_PASSWORD, 'message' => "Запись добавлена. Короткая ссылка:  
-					<a href='http://" . $serverName . "/" . $shortLink . "' >" . $serverName . "/" . $shortLink . "</a>"
-					];
+        return HTML::render('answerTypes/success', ['serverName' => $_SERVER['SERVER_NAME'], 'shortLink' => $shortLink]);
     }
 }

@@ -18,7 +18,7 @@ class Index
         }
 
         if ($request == '') {
-            return HTML::render('main', ['shortlink' => $defaultShortLink]);
+            return HTML::render('main', ['shortlink' => $defaultShortLink, 'serverName' => $_SERVER['SERVER_NAME']]);
         }
 
         $database = database::getDatabase();
@@ -35,11 +35,19 @@ class Index
 //        $withoutSchemeLink = http_build_url($withoutSchemeLink);;
         $type = $stmt['type'];
 
-        $siteReputation = Index::wotRequest($fullLink);
+        if ($type == Save::TYPE_RELINK || $type == Save::TYPE_NO_RELINK) {
+            $siteReputation = Index::wotRequest($fullLink);
 
-        if ($siteReputation < Config::get()['min_wot_reputation']) {
-            $type = Save::TYPE_BAD_REPUTATION;
+            if ($siteReputation < Config::get()['min_wot_reputation']) {
+                $type = Save::TYPE_BAD_REPUTATION;
+            }
+
+            if ($siteReputation == 0) {
+                $type = Save::TYPE_EMPTY_REPUTATION;
+            }
         }
+
+
 
         $clearlink = $fullLink;
         $addn = '';
@@ -63,6 +71,8 @@ class Index
                 return '';
             case Save::TYPE_BAD_REPUTATION:
                 return HTML::render('linkTypes/badReputation', ['fullLink' => $fullLink]);
+            case Save::TYPE_EMPTY_REPUTATION:
+                return HTML::render('linkTypes/emptyReputation', ['fullLink' => $fullLink]);
         }
 
     }
@@ -89,7 +99,7 @@ class Index
             $reputation = $reputation > $childReputation ? $reputation : $childReputation;
 
             if (!$reputation) {
-                $reputation = 20;
+                $reputation = 0;
             }
         }
             return $reputation;

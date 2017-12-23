@@ -20,5 +20,4 @@ require_once ('models/Helper.php');
 require_once ('models/Save.php');
 require_once ('models/Index.php');
 
-//require_once("db.php"); // Подключаем БД // FIXME DELME
 require_once("config.php");

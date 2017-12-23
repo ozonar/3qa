@@ -3,20 +3,20 @@
 
 $ch = curl_init('http://hm6.ru/poisk-po-bukve/%D8/');
 
-// Ïàðàìåòðû êóðëà
+// ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ ÐºÑƒÑ€Ð»Ð°
 curl_setopt($ch, CURLOPT_USERAGENT, 'IE20');
 curl_setopt($ch, CURLOPT_HEADER, 0);
-// Ñëåäóþùàÿ îïöèÿ íåîáõîäèìà äëÿ òîãî, ÷òîáû ôóíêöèÿ curl_exec() âîçâðàùàëà çíà÷åíèå à íå âûâîäèëà ñîäåðæèìîå ïåðåìåííîé íà ýêðàí
+// Ð¡Ð»ÐµÐ´ÑƒÑŽÑ‰Ð°Ñ Ð¾Ð¿Ñ†Ð¸Ñ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð° Ð´Ð»Ñ Ñ‚Ð¾Ð³Ð¾, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ curl_exec() Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°Ð»Ð° Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð° Ð½Ðµ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð»Ð° ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ð¼Ð¾Ðµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ Ð½Ð° ÑÐºÑ€Ð°Ð½
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, '1');
 
-// Ïîëó÷àåì html
+// ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ html
 $text = curl_exec($ch);
 
 
 //curl_close($ch);
 
 preg_match_all("#class='b-listing-singers__item__name_m'><a href='\/([A-z0-9.-]+)\/'>([^<]+)<\/a#", $text , $links );
- 
+
 //iconv("windows-1251","utf-8", $links);
 print_r ($links[2]);
 print_r ($links[1]);

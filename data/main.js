@@ -1,7 +1,7 @@
 $(document).ready(function() {
-
     $('#short_button').click(function() {
-        $.post('save.php', {link : $('#link').attr('value'),
+        $.post('save.php', {
+            link : $('#link').attr('value'),
             what : $('#what').attr('value'),
             auto : $('#auto').attr('checked'),
             nolink : $('#nolink').attr('checked'),
@@ -12,14 +12,15 @@ $(document).ready(function() {
     });
 
     $('#save_button').click(function() {
-        $.post('save.php', {link : $('#link').attr('value'),
+        $.post('save.php', {
+            link : $('#link').attr('value'),
             what : $('#what').attr('value'),
             auto : $('#auto').attr('checked'),
             image : 'checked',
             nolink : $('#nolink').attr('checked')
         }, function(data) {
             $('#user_data').html(data);
-        });
+        });//
     });
 
 
