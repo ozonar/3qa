@@ -21,3 +21,8 @@ require_once ('models/Save.php');
 require_once ('models/Index.php');
 
 require_once("config.php");
+
+
+// Dont need for everyone
+require('models/vk/VK.php');
+require('models/vk/VKException.php');
