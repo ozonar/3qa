@@ -11,7 +11,7 @@ $request = str_replace('/', '', current($request));
 
 ?>
 <!DOCTYPE HTML>
-<html>
+<html lang="ru">
 <head>
 
     <!-- Кодирование -->
