@@ -1,4 +1,4 @@
-
+use shorter;
 DROP TABLE IF EXISTS short;
 CREATE TABLE IF NOT EXISTS short
 (

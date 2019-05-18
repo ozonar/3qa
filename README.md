@@ -14,7 +14,7 @@ Installation:
 
         cp config.dist.php config.php
 
-3. Fill parameters:
+3. Fill parameters in config.php:
 
         //Database config:
             dbtype
