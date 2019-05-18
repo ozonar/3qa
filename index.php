@@ -41,7 +41,7 @@ $request = str_replace('/', '', current($request));
     <script src="data/bootstrap.min.js"></script>
     <link rel="stylesheet" href="data/font-awesome/css/font-awesome.min.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/ico">
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+<!--    <script src='https://www.google.com/recaptcha/api.js'></script>-->
 
 </head>
 <body>
