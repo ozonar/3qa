@@ -4,7 +4,7 @@ use Main\Helper;
 use models\database;
 require_once('autoload.php');
 
-$save = new models\Save();
+$saveModel = new models\Save();
 $database = database::getDatabase();
 
 
@@ -21,38 +21,37 @@ $updateCurrentNumber = 0;
 
 // Если пустая ссылка
 if ($longLink == '') {
-    echo $save->resultEmpty();
+    echo $saveModel->resultEmpty();
     return;
 }
 
-if (!$shortLink) {
-    $shortLink = $save->getShortNumber();
+if ($shortLink == '') {
+    $shortLink = $saveModel->getShortNumber();
     $updateCurrentNumber = 1;
 } else {
 
     // Проверить базу на наличие короткой ссылки из текущего запроса
     $dublicateResult = $database->select('short', ['long'], ['little[=]' => $shortLink]);
     if (!empty($dublicateResult) && !$isImage) {
-        echo $save->resultExistDublicate();
+        echo $saveModel->resultExistDublicate();
         return;
     }
 }
-$type = $save->getType($noRelink, $textOnly, $isImage);
+$type = $saveModel->getType($noRelink, $textOnly, $isImage);
 
 // Сохранить изображение или файл
 if ($isImage == true) {
     if ($shortLink != \models\Config::get()['save_image_password']) {
-        echo $save->resultWrongPassword();
+        echo $saveModel->resultWrongPassword();
         return;
     }
 
-//    echo "<pre>\n"; var_dump(__DIR__); echo "\n</pre>"; exit;
     $fileFrom = $longLink;
     $filenameFrom = basename($fileFrom);
     $uploadToDir = '/../images/' . $filenameFrom;
     
     if (!copy($fileFrom, $uploadToDir)) {
-        echo $save->resultDownloadError();
+        echo $saveModel->resultDownloadError();
         return;
     }
     $longLink = '../images/' . basename($longLink);
@@ -70,12 +69,12 @@ try {
         $database->update('short', ['long' => $shortLink], ['little[=]' => 404]);
     }
 } catch (Exception $e) {
-    $save->resultErrorWhileSaving();
+    $saveModel->resultErrorWhileSaving();
     return;
 }
 
 if (!empty($result)) {
     // Вы приняты. Распишитесь.
-    echo $save->resultSuccess($shortLink);
+    echo $saveModel->resultSuccess($shortLink);
 }
 

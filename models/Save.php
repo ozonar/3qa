@@ -61,9 +61,18 @@ class Save
 //        }
 
         $lastNumber = $this->database->select('short', ['long'], ['short.little[=]' => '404']);
-        $lastNumber = isset(current($lastNumber)['long']) ? current($lastNumber)['long'] : 101;
 
-        $savedNumber = $lastNumber;
+        if (!$lastNumber) {
+             $this->database->insert('short', [
+                'type' => 0,
+                'little' => 404,
+                'long' => 101,
+                'ip' => $_SERVER["REMOTE_ADDR"],
+            ]);
+        }
+
+        $savedNumber = isset(current($lastNumber)['long']) ? current($lastNumber)['long'] : 101;
+
         do {
             $savedNumber++;
             $sovpad = $this->database->select('short', ['long', 'little'], ['little[=]' => $savedNumber]);
@@ -74,17 +83,17 @@ class Save
 
     public function getType($noRelink, $textOnly, $isImage)
     {
-        $type = Save::TYPE_RELINK;
+        $type = self::TYPE_RELINK;
         if ($noRelink) {
-            $type = Save::TYPE_NO_RELINK;
+            $type = self::TYPE_NO_RELINK;
         }
 
         if ($textOnly) {
-            $type = Save::TYPE_TEXT;
+            $type = self::TYPE_TEXT;
         }
 
         if ($isImage) {
-            $type = Save::TYPE_IMAGE;
+            $type = self::TYPE_IMAGE;
         }
 
         return $type;

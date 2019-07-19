@@ -6,8 +6,7 @@ use models\Index;
 $defaultShortLink = Helper::requestString('shortlink', '');
 
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$request = parse_url($request);
-$request = str_replace('/', '', current($request));
+$request = str_replace('/', '', $request);
 
 ?>
 <!DOCTYPE HTML>
