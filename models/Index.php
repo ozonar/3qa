@@ -40,18 +40,6 @@ class Index
 //        $withoutSchemeLink = http_build_url($withoutSchemeLink);
         $type = $stmt['type'];
 
-        if ($type == Save::TYPE_RELINK || $type == Save::TYPE_NO_RELINK) {
-            $siteReputation = Index::wotRequest($fullLink);
-
-            if ($siteReputation < Config::get()['min_wot_reputation']) {
-                $type = Save::TYPE_BAD_REPUTATION;
-            }
-
-            if ($siteReputation == 0) {
-                $type = Save::TYPE_EMPTY_REPUTATION;
-            }
-        }
-
         switch ($type) {
             default:
                 return 'Empty';
@@ -72,38 +60,4 @@ class Index
         }
 
     }
-
-    /**
-     * @param $hosts
-     * @return int
-     */
-    public static function wotRequest($hosts)
-    {
-        $secret_key = Config::get()['wot_secret_key'];
-        $reputation = 0;
-        if ($curl = curl_init()) {
-
-            $hosts = $hosts . '/';
-
-            curl_setopt($curl, CURLOPT_URL, "api.mywot.com/0.4/public_link_json2?key=$secret_key&hosts=$hosts");
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            $out = curl_exec($curl);
-            $out = json_decode($out, true);//
-            curl_close($curl);
-
-            $reputation = @current($out)[0][0];
-            $childReputation = @current($out)[4][0];
-
-            $reputation = $reputation > $childReputation ? $reputation : $childReputation;
-
-            if (!$reputation) {
-                $reputation = 0;
-            }
-        }
-        return $reputation;
-    }
-
-
 }
